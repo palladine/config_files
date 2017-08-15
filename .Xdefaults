@@ -1,0 +1,67 @@
+Xft.autohint:		false
+Xft.lcdfilter:		lcdlegacy
+Xft.dpi:		96
+Xft.antialias:		true
+Xft.rgba:		rgb
+Xft.hinting:		true
+Xft.hintstyle:		hintslight
+
+!URxvt*boldFont:	xft:dejavu sans mono:pixelsize=16
+URxvt*font:		xft:dejavu sans mono for powerline:pixelsize=16
+URxvt*allow_bold:	true
+URxvt*foreground:	#dedede
+URxvt*background:	#000000
+URxvt*fading:		50
+URxvt*transparent:	true
+URxvt*shading:		40
+URxvt*inheritPixmap:	true
+URxvt*saveLines:	1000
+URxvt*scrollBar:	false
+URxvt*scrollstyle:	plain
+URxvt*cursorBlink:	true
+URxvt*letterSpace:	0
+URxvt*insecure:		false
+
+URxvt*keysym.Control-Up:      \033[1;5A
+URxvt*keysym.Control-Down:    \033[1;5B
+URxvt*keysym.Control-Left:    \033[1;5D
+URxvt*keysym.Control-Right:   \033[1;5C
+
+!---------------------
+!Colors
+!---------------------
+
+*.cursorColor: #dedede
+
+!black
+*.color0: #252525
+*.color8: #252525
+
+!red
+*.color1:  #ff8080
+*.color9:  #ff8080
+
+!green
+*.color2:  #85e085
+*.color10: #85e085
+
+!yellow
+*.color3:  #d9ff66
+*.color11: #d9ff66
+
+!blue
+*.color4:  #99b3ff
+*.color12: #99b3ff
+
+!magenta
+*.color5:  #ffb3ff
+*.color13: #ffb3ff
+
+!cyan
+*.color6:  #99e6ff
+*.color14: #99e6ff
+
+!white
+*.color7:  #dedede
+*.color15: #dedede
+
