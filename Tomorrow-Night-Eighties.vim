@@ -11,6 +11,7 @@ let s:line = "393939"
 let s:linecol = "313131"
 let s:vislines = "454545"
 let s:comment = "999999"
+let s:spaces = "424242"
 let s:red = "ff8080"
 let s:orange = "dd7711"
 let s:yellow = "ffff80"
@@ -238,12 +239,13 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	" Vim Highlighting
 	call <SID>X("Normal", s:foreground, s:background, "")
 	call <SID>X("LineNr", s:comment, s:background, "")
-	call <SID>X("NonText", s:comment, "", "")
-	call <SID>X("SpecialKey", s:comment, "", "")
+	call <SID>X("NonText", s:spaces, "", "")
+	call <SID>X("SpecialKey", s:spaces, "", "")
 	call <SID>X("Search", s:background, s:yellow, "")
 	call <SID>X("TabLine", s:foreground, s:background, "reverse")
-	call <SID>X("StatusLine", s:window, s:yellow, "reverse")
-	call <SID>X("StatusLineNC", s:window, s:foreground, "reverse")
+	call <SID>X("TabLineSel", s:spaces, s:background, "")
+	call <SID>X("StatusLine", s:background, s:comment, "reverse")
+	"call <SID>X("StatusLineNC", s:background, s:comment, "reverse")
 	call <SID>X("VertSplit", s:window, s:window, "none")
 	call <SID>X("Visual", "", s:vislines, "")
 	call <SID>X("Directory", s:blue, "", "")
@@ -252,10 +254,12 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("Question", s:green, "", "")
 	call <SID>X("WarningMsg", s:red, "", "")
 	call <SID>X("Folded", s:comment, s:background, "")
-	call <SID>X("FoldColumn", "", s:background, "")
+	call <SID>X("FoldColumn", s:comment, s:background, "")
 	call <SID>X("MatchParen", s:greenmatch, s:background, "bold")
-	
+	call <SID>X("WildMenu", s:foreground, s:background, "bold")
 	if version >= 700
+		call <SID>X("Cursor", "", "", "")
+		call <SID>X("iCursor", "", "", "")
 		call <SID>X("CursorLine", "", s:line, "")
 		call <SID>X("CursorLineNR", s:orange, s:line, "bold")
 		call <SID>X("CursorColumn", "", s:linecol, "none")
@@ -271,7 +275,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("TagbarHighlight", s:orange, s:background, "bold")
 
 	" Standard Highlighting
-	call <SID>X("Comment", s:comment, "", "")
+	call <SID>X("Comment", s:comment, "", "italic")
 	call <SID>X("Todo", s:comment, s:background, "")
 	call <SID>X("Title", s:comment, "", "")
 	call <SID>X("Identifier", s:red, "", "none")
@@ -284,11 +288,11 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("String", s:green, "", "")
 	call <SID>X("Special", s:foreground, "", "")
 	call <SID>X("PreProc", s:purple, "", "")
-	call <SID>X("Operator", s:aqua, "", "none")
+	call <SID>X("Operator", s:foreground, "", "none")
 	call <SID>X("Type", s:blue, "", "none")
 	call <SID>X("Define", s:purple, "", "none")
 	call <SID>X("Include", s:blue, "", "")
-	"call <SID>X("Ignore", "666666", "", "")
+	call <SID>X("Ignore", s:spaces, "", "")
 
 	" Vim Highlighting
 	call <SID>X("vimCommand", s:red, "", "none")

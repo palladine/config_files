@@ -106,8 +106,9 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end}
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal },
+mymainmenu = awful.menu({ items = { { " awesome", myawesomemenu, beautiful.awesome_icon },
+									{ " Run", "dmenu_run -i -p 'Run:' -sb '#363636' -nf '#aaa' -sf '#fdfdfd' -fn 'DejaVu Sans for Powerline:size=12'", beautiful.run_icon},
+                                    { " open terminal", terminal },
                                     { " Перезагрузка", function()  awful.util.spawn_with_shell("systemctl reboot") end, beautiful.reboot_icon},
                                     { " Выключение", function()  awful.util.spawn_with_shell("systemctl poweroff") end, beautiful.poweroff_icon}
                                   }
@@ -264,7 +265,9 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    -- Create a taglist widget
+    
+						   
+-- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
 
     -- Create a tasklist widget
@@ -421,7 +424,12 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+    awful.key({ modkey }, "p", 
+			  function() 
+				  --menubar.show()
+				  -- dmenu2 (AUR)!!!
+				  awful.util.spawn_with_shell( "dmenu_run -i -p 'Выполнить:' -l 0 -w 1000 -h 40 -x 450 -y 400 -dim 0.6 -sb '#363636' -nf '#aaa' -sf '#fdfdfd' -fn 'Source Code Pro for Powerline:size=18'" )
+			  end,
               {description = "show the menubar", group = "launcher"})
 )
 
@@ -532,7 +540,7 @@ root.keys(globalkeys)
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
-    { rule = { },
+	{ rule = { },
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
@@ -540,6 +548,8 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
+					 -- !!! size_hints_honor = false  ровные отступы от экрана
+					 size_hints_honor = false,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
      }
     },

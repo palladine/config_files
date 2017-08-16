@@ -66,6 +66,7 @@ filetype plugin indent on
 syntax on
 set t_Co=256
 colorscheme Tomorrow-Night-Eighties
+"colorscheme Tomorrow-Night
 set fillchars=stl:\ ,stlnc:\ ,vert:│
 set lines=50 columns=150
 set shortmess+=I            " без стартового экрана
@@ -78,9 +79,9 @@ set laststatus=2			" включить панель статуса
 
 set statusline=[%n]\ %<%F\ %m%r%h%w\ %y\ [%{&ff}]\ [%{&fileencoding}]\ %=\ [%{&encoding}]\ \ \ ASCII:%3b\ \ \ Hex:\ 0x%2B\ \ \ Ln:%3l:%L\ \ \ Col:%3c
 
-set showmode 				" отображать режим в строке статуса
+set showmode                " отображать режим в строке статуса
 
-set showmatch				" показывать первую скобку после ввода второй
+set showmatch               " показывать первую скобку после ввода второй
 
 set guioptions-=m
 set guioptions-=T
@@ -92,8 +93,7 @@ set guioptions-=l
 set guioptions-=v
 
 set list
-set listchars=tab:>·,trail:·   " символ табуляции и пробела 
-
+set listchars=tab:>·,trail:·,nbsp:·         " символ табуляции и пробела 
 
 "--- Encoding ---
 set enc=utf-8
@@ -133,12 +133,11 @@ set nowritebackup
 set noswapfile
 
 "--- General ---
-set updatetime=250
+set updatetime=100
 set completeopt-=preview
 set backspace=indent,eol,start
 set ttyfast
-set visualbell t_vb=
-set novisualbell
+set visualbell
 set history=200						" история команд
 set nowrap							" не переносить длинные слова
 
@@ -152,7 +151,7 @@ set autochdir				" установить директорию открытого 
 "--- GUI --- 
 if has("gui_running")
    set cursorline |
-   set guicursor=a:hor15-Cursor |
+   set guicursor=a:hor12-Cursor |
    set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
 endif
 
@@ -177,8 +176,8 @@ let g:user_emmet_leader_key='<C-z>'
 "--- Indent guides ---
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#282828 ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222222 ctermbg=4
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guifg=#424242 guibg=#282828 ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guifg=#424242 guibg=#222222 ctermbg=4
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_exclude_filetypes = ['nerdtree', 'tagbar']
