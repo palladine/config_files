@@ -130,7 +130,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ MyWidgets
 -- Separator --
 myseparator = wibox.widget.textbox()
-myseparator:set_text(" | ")
+myseparator:set_text("|")
 myseparator:set_align("center")
 myseparator:set_valign("center")
 
@@ -151,20 +151,28 @@ mywidgetnet = wibox.widget.textbox()
 vicious.register(mywidgetnet, vicious.widgets.net, " <span color='#C9C9C9'>down</span> ${enp5s0 down_kb} kb / <span color='#C9C9C9'>up</span> ${enp5s0 up_kb} kb ", 1)
 
 ---HDD---
+hddicon = wibox.widget.imagebox()
+hddicon:set_image(beautiful.pan_hdd)
 mywidgethdd = wibox.widget.textbox()
-vicious.register(mywidgethdd, vicious.widgets.fs, " <span color='#C9C9C9'>hdd</span> ${/ used_p}% [${/ size_gb} Gb] ", 1)
+vicious.register(mywidgethdd, vicious.widgets.fs, "${/ used_p}% [${/ size_gb} Gb] ", 1)
 
 ---Memory---
+memicon = wibox.widget.imagebox()
+memicon:set_image(beautiful.pan_mem)
 mywidgetmem = wibox.widget.textbox()
-vicious.register(mywidgetmem, vicious.widgets.mem, " <span color='#C9C9C9'>mem</span> $1% ", 1)
+vicious.register(mywidgetmem, vicious.widgets.mem, "$1% ", 1)
 
 ---CPU---
+cpuicon = wibox.widget.imagebox()
+cpuicon:set_image(beautiful.pan_cpu)
 mywidgetcpu = wibox.widget.textbox()
-vicious.register(mywidgetcpu, vicious.widgets.cpu, " <span color='#C9C9C9'>cpu</span> $1% ", 1)
+vicious.register(mywidgetcpu, vicious.widgets.cpu, "$1% ", 1)
 
 --- Volume ---
+volicon = wibox.widget.imagebox()
+volicon:set_image(beautiful.pan_vol)
 volwidget = wibox.widget.textbox()
-vicious.register(volwidget, vicious.widgets.volume, "<span color='#C9C9C9'>vol</span> $1% ", 2, "Master")
+vicious.register(volwidget, vicious.widgets.volume, "$1% ", 2, "Master")
 volwidget:buttons(awful.util.table.join(
     awful.button({ }, 1, function () awful.util.spawn("amixer -q set Master toggle", false) end),
     -- awful.button({ }, 3, function () awful.util.spawn("urxvt -e alsamixer", true) end),
@@ -295,10 +303,13 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
 			wibox.widget.systray(),
 			myseparator,
+			cpuicon,
 			mywidgetcpu,
 			myseparator,
+			memicon,
 			mywidgetmem,
 			myseparator,
+			hddicon,
 			mywidgethdd,
 			myseparator,
 			mywidgetnet,
@@ -307,6 +318,7 @@ awful.screen.connect_for_each_screen(function(s)
 			myseparator,
 			mykeyboardlayout,
 			myseparator,
+			volicon,
 			volwidget,
             myseparator,
             mywidgetdate,

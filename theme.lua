@@ -13,7 +13,7 @@ theme.wallpaper = themes_path .. "awnew/squares2.jpg"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "hack mono 10"
+theme.font      = "dejavu sans for powerline 10"
 
 -- {{{ Colors
 theme.fg_normal  = "#aaaaaa"
@@ -160,6 +160,14 @@ theme.chromium = themes_path .. "awnew/icons/chromium.png"
 --theme.emacs = "~/.config/awesome/themes/mytheme/icons/emacs.png"
 -- }}}
 
+
+
+-- {{{ Panel
+    theme.pan_cpu = themes_path .. "awnew/icons/panel/cpu.png"
+    theme.pan_mem = themes_path .. "awnew/icons/panel/mem.png"
+    theme.pan_hdd = themes_path .. "awnew/icons/panel/hdd.png"
+    theme.pan_vol = themes_path .. "awnew/icons/panel/vol.png"
+---}}}
 -- }}}
 
 return theme
