@@ -131,8 +131,16 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Separator --
 myseparator = wibox.widget.textbox()
 myseparator:set_text("|")
-myseparator:set_align("center")
 myseparator:set_valign("center")
+myseparator:set_align("center")
+
+myseparatorspaces = wibox.widget.textbox()
+myseparatorspaces:set_text(" | ")
+myseparatorspaces:set_valign("center")
+myseparatorspaces:set_align("center")
+
+
+
 
 --   {{{ MyButtonApplications
 atril_button = awful.widget.button({ image = beautiful.atril })
@@ -147,8 +155,18 @@ chromium_button:buttons(awful.util.table.join(awful.button({ }, 1, function () a
 
 
 --- NET ---
-mywidgetnet = wibox.widget.textbox()
-vicious.register(mywidgetnet, vicious.widgets.net, " <span color='#C9C9C9'>down</span> ${enp5s0 down_kb} kb / <span color='#C9C9C9'>up</span> ${enp5s0 up_kb} kb ", 1)
+neticondown = wibox.widget.imagebox()
+neticondown:set_image(beautiful.pan_net_down)
+neticonup = wibox.widget.imagebox()
+neticonup:set_image(beautiful.pan_net_up)
+
+mywidgetnetdown = wibox.widget.textbox()
+vicious.register(mywidgetnetdown, vicious.widgets.net, "${enp5s0 down_kb} kb", 1) 
+
+mywidgetnetup = wibox.widget.textbox()
+vicious.register(mywidgetnetup, vicious.widgets.net, "${enp5s0 up_kb} kb ", 1)
+
+
 
 ---HDD---
 hddicon = wibox.widget.imagebox()
@@ -291,11 +309,11 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
-            myseparator,
+            myseparatorspaces,
 			atril_button,
 			vim_button,
 			chromium_button,
-			myseparator,
+			myseparatorspaces,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
@@ -312,18 +330,21 @@ awful.screen.connect_for_each_screen(function(s)
 			hddicon,
 			mywidgethdd,
 			myseparator,
-			mywidgetnet,
-            myseparator,
+			neticondown,
+			mywidgetnetdown,
+			neticonup,
+			mywidgetnetup,
+            myseparatorspaces,
 			pacwidget,
-			myseparator,
+			myseparatorspaces,
 			mykeyboardlayout,
 			myseparator,
 			volicon,
 			volwidget,
-            myseparator,
+            myseparatorspaces,
             mywidgetdate,
             --mytextclock,
-			myseparator,
+			myseparatorspaces,
             s.mylayoutbox,
             layout_launcher,
         },

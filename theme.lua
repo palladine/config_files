@@ -87,8 +87,8 @@ theme.menu_width  = dpi(200)
 
 -- {{{ Icons
 -- {{{ Taglist
-theme.taglist_squares_sel   = themes_path .. "awnew/taglist/squarefz.png"
-theme.taglist_squares_unsel = themes_path .. "awnew/taglist/squarez.png"
+theme.taglist_squares_sel   = themes_path .. "awnew/icons/panel/square_sel.png"
+theme.taglist_squares_unsel   = themes_path .. "awnew/icons/panel/square_unsel.png"
 
 --theme.taglist_squares_resize = "false"
 -- }}}
@@ -167,6 +167,9 @@ theme.chromium = themes_path .. "awnew/icons/chromium.png"
     theme.pan_mem = themes_path .. "awnew/icons/panel/mem.png"
     theme.pan_hdd = themes_path .. "awnew/icons/panel/hdd.png"
     theme.pan_vol = themes_path .. "awnew/icons/panel/vol.png"
+    theme.pan_net_down = themes_path .. "awnew/icons/panel/net_arrow_down.png"
+    theme.pan_net_up = themes_path .. "awnew/icons/panel/net_arrow_up.png"
+
 ---}}}
 -- }}}
 
