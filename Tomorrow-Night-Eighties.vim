@@ -264,7 +264,9 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 		call <SID>X("CursorLineNR", s:orange, s:line, "bold")
 		call <SID>X("CursorColumn", "", s:linecol, "none")
 		call <SID>X("PMenu", s:foreground, s:line, "none")
-		call <SID>X("PMenuSel", s:foreground, s:line, "bold")
+		call <SID>X("PMenuSel", s:selection, s:vislines, "bold")
+		call <SID>X("PMenuSbar", "", s:line, "")
+		call <SID>X("PMenuThumb", "", s:vislines, "")
 		call <SID>X("SignColumn", "", s:background, "none")
 	end
 	if version >= 703

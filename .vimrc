@@ -81,6 +81,8 @@ set statusline=[%n]\ %<%F\ %m%r%h%w\ %y\ [%{&ff}]\ [%{&fileencoding}]\ %=\ [%{&e
 
 set showmode                " отображать режим в строке статуса
 
+set pumheight=15
+
 set showmatch               " показывать первую скобку после ввода второй
 
 set guioptions-=m
@@ -151,8 +153,8 @@ set autochdir				" установить директорию открытого 
 "--- GUI --- 
 if has("gui_running")
    set cursorline |
-   set guicursor=a:hor12-Cursor |
-   set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
+   set guicursor=a:hor11-Cursor |
+   set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
 endif
 
 "--- Gitgutter ---
