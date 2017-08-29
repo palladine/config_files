@@ -206,7 +206,34 @@ vicious.register(pacwidget, vicious.widgets.pkg, "<span color='#c9c9c9'> upd</sp
 
 --- Date Time ---
 mywidgetdate = wibox.widget.textbox()
-vicious.register(mywidgetdate, vicious.widgets.date, "%A %d %B %T", 1)
+vicious.register(mywidgetdate, vicious.widgets.date, "%T (%A)", 1)
+
+local notific
+mywidgetdate:connect_signal("button::release", 
+    function() 
+	if not notific then
+	    awful.spawn.easy_async([[bash -c "ncal -C -A1 | sed 's/_.\(.\)/+\1-/g'"]],
+	    function(stdout, stderr, reason, exit_code)
+		notific = naughty.notify{
+		    text = string.gsub(string.gsub(stdout,"+", "<span color='#ffff00'>"), "-", "</span>"),
+		    timeout = 0,
+		    position = "top_right",
+		    font = "dejavu sans mono 12",
+		    border_width = 1,
+		    border_color = '#aaaaaa',
+		    width = auto,
+		    height = 165,
+		    margin = 15,
+		}
+	    end)
+	else
+	    naughty.destroy(notific)
+	    notific = false
+	end
+
+    end
+)
+
 -- }}}
 
 
@@ -310,10 +337,10 @@ awful.screen.connect_for_each_screen(function(s)
             mylauncher,
             s.mytaglist,
             myseparatorspaces,
-			atril_button,
-			vim_button,
-			chromium_button,
-			myseparatorspaces,
+	    atril_button,
+	    vim_button,
+	    chromium_button,
+	    myseparatorspaces,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
@@ -334,7 +361,7 @@ awful.screen.connect_for_each_screen(function(s)
 			mywidgetnetdown,
 			neticonup,
 			mywidgetnetup,
-            myseparatorspaces,
+			myseparatorspaces,
 			pacwidget,
 			myseparatorspaces,
 			mykeyboardlayout,
@@ -614,9 +641,9 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
+    --{ rule_any = {type = { "normal", "dialog" }
+    --  }, properties = { titlebars_enabled = true }
+    --},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
