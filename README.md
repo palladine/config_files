@@ -1,5 +1,4 @@
-# config_files
-The configuration's files
+The configuration's files.
 
 
 --- AWESOME WM 4 Screenshot --
