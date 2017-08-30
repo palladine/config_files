@@ -107,7 +107,8 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { " awesome", myawesomemenu, beautiful.awesome_icon },
-									{ " Run", "dmenu_run -i -p 'Run:' -sb '#363636' -nf '#aaa' -sf '#fdfdfd' -fn 'DejaVu Sans for Powerline:size=12'", beautiful.run_icon},
+				    { " Снимок экрана", function() awful.util.spawn_with_shell("scrot -d10 -q100 screenshot.png") end },
+				    { " Run", "dmenu_run -i -p 'Выполнить:' -l 0 -w 1000 -h 40 -x 450 -y 400 -dim 0.6 -sb '#363636' -nf '#aaa' -sf '#fdfdfd' -fn 'Source Code Pro for Powerline:size=18'", beautiful.run_icon},
                                     { " open terminal", terminal },
                                     { " Перезагрузка", function()  awful.util.spawn_with_shell("systemctl reboot") end, beautiful.reboot_icon},
                                     { " Выключение", function()  awful.util.spawn_with_shell("systemctl poweroff") end, beautiful.poweroff_icon}
