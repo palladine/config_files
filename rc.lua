@@ -174,17 +174,73 @@ hddicon:set_image(beautiful.pan_hdd)
 mywidgethdd = wibox.widget.textbox()
 vicious.register(mywidgethdd, vicious.widgets.fs, "${/ used_p}% [${/ size_gb} Gb] ", 1)
 
+local notific_hdd
+mywidgethdd:connect_signal("button::release",
+	-- function(widget,args)!!!
+	function()
+	if not notific_hdd then
+		awful.spawn.easy_async([[bash -c "df -h"]],
+		function(stdout, stderr, reason, exit_code)
+		notific_hdd = naughty.notify{
+			text = (stdout),
+			timeout = 0,
+		    position = "top_right",
+		    font = "dejavu sans mono 12",
+		    border_width = 1,
+		    border_color = '#aaaaaa',
+		    width = auto,
+		    height = auto,
+		    margin = 15,
+		}
+		end)
+	else
+		naughty.destroy(notific_hdd)
+		notific_hdd = false
+	end
+	end
+)
+
+
+
+
 ---Memory---
 memicon = wibox.widget.imagebox()
 memicon:set_image(beautiful.pan_mem)
 mywidgetmem = wibox.widget.textbox()
-vicious.register(mywidgetmem, vicious.widgets.mem, "$1% ", 1)
+vicious.register(mywidgetmem, vicious.widgets.mem, 
+    function(widget, args)
+    local text
+    if args[1] > 50 then
+	text = "<span color='#ffff00'>" .. args[1] .."%</span> "
+    else
+	text = args[1] .. "% "
+    end
+    return text
+    end
+    , 1)
+
+--mywidgetmem:buttons(awful.button({}, 
+--		    1, 
+--		    function() awful.util.spawn(terminal .. " -e htop") end)
+--		    )
+
+
 
 ---CPU---
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.pan_cpu)
 mywidgetcpu = wibox.widget.textbox()
-vicious.register(mywidgetcpu, vicious.widgets.cpu, "$1% ", 1)
+vicious.register(mywidgetcpu, vicious.widgets.cpu, 
+    function(widget, args)
+    local text
+    if args[1] > 50 then
+	text = "<span color='#ffff00'>" .. args[1] .."%</span> "
+    else
+	text = args[1] .. "% "
+    end
+    return text
+    end
+    , 1)
 
 --- Volume ---
 volicon = wibox.widget.imagebox()
@@ -200,9 +256,49 @@ volwidget:buttons(awful.util.table.join(
 
 --- Pkg update ---
 pacwidget = wibox.widget.textbox()
-vicious.register(pacwidget, vicious.widgets.pkg, "<span color='#c9c9c9'> upd</span> $1 ", 610, 'Arch C')
+pacicon = wibox.widget.imagebox()
+vicious.register(pacwidget, vicious.widgets.pkg, 
+    function(widget, args)
+    local text
+    if args[1] > 0 then
+		pacicon:set_image(beautiful.pan_upd)
+		text = "<span color='#ffff00'>" .. args[1] .. "</span> "
+    else
+		pacicon:set_image(beautiful.pan_upd_no)
+		text = "··· "
+    end
+	return text
+    end
+, 1800, 'Arch C')
 
-
+local notific_pkg
+pacwidget:connect_signal("button::release",
+	-- function(widget,args)!!!
+	function()
+	if not notific_pkg then
+		awful.spawn.easy_async([[bash -c "pacman -Qu"]],
+		function(stdout, stderr, reason, exit_code)
+			if stdout:len() > 0 then
+			notific_pkg = naughty.notify{
+			text = (stdout .. stderr),
+			timeout = 0,
+		    position = "top_right",
+		    font = "dejavu sans mono 12",
+		    border_width = 1,
+		    border_color = '#aaaaaa',
+			height = auto,
+			width = auto,
+			margin = 15,
+			}
+			end
+		end)
+	else
+		naughty.destroy(notific_pkg)
+		notific_pkg = false
+	end
+	end
+)
+--pacicon:connect_signal() 
 
 --- Date Time ---
 mywidgetdate = wibox.widget.textbox()
@@ -362,6 +458,7 @@ awful.screen.connect_for_each_screen(function(s)
 			neticonup,
 			mywidgetnetup,
 			myseparatorspaces,
+			pacicon,
 			pacwidget,
 			myseparatorspaces,
 			mykeyboardlayout,

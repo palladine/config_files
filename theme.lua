@@ -169,6 +169,8 @@ theme.chromium = themes_path .. "awnew/icons/chromium.png"
     theme.pan_vol = themes_path .. "awnew/icons/panel/vol.png"
     theme.pan_net_down = themes_path .. "awnew/icons/panel/net_arrow_down.png"
     theme.pan_net_up = themes_path .. "awnew/icons/panel/net_arrow_up.png"
+    theme.pan_upd_no = themes_path .. "awnew/icons/panel/upd_no.png"
+    theme.pan_upd = themes_path .. "awnew/icons/panel/upd.png"
 
 ---}}}
 -- }}}
