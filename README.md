@@ -1,3 +1,3 @@
 # config_files
 configuration
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
+![Alt text](/config_files/screenshots/screenshot.png?raw=true "Awesome WM 4")
