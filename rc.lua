@@ -261,17 +261,18 @@ volwidget:buttons(awful.util.table.join(
 --- Pkg update ---
 pacwidget = wibox.widget.textbox()
 pacicon = wibox.widget.imagebox()
+pacicon:set_image(beautiful.pan_upd)
 vicious.register(pacwidget, vicious.widgets.pkg, 
     function(widget, args)
     local text
     if args[1] > 0 then
-		pacicon:set_image(beautiful.pan_upd)
-		text = "<span color='#ffff00'>" .. args[1] .. "</span> "
+		pacicon.visible = true
+		text = "<span color='#ffff00'>" .. args[1] .. "</span> |"
     else
-		pacicon:set_image(beautiful.pan_upd_no)
-		text = "··· "
+		pacicon.visible = false
+		text = ""
     end
-	return text
+    return text
     end
 , 1800, 'Arch C')
 
@@ -284,12 +285,12 @@ pacwidget:connect_signal("button::release",
 		function(stdout, stderr, reason, exit_code)
 			if stdout:len() > 0 then
 			notific_pkg = naughty.notify{
-			text = (stdout .. stderr),
+			text = (stdout),
 			timeout = 0,
-		    position = "top_right",
-		    font = "dejavu sans mono 12",
-		    border_width = 1,
-		    border_color = '#aaaaaa',
+			position = "top_right",
+			font = "dejavu sans mono 12",
+			border_width = 1,
+			border_color = '#aaaaaa',
 			height = auto,
 			width = auto,
 			margin = 15,
@@ -406,7 +407,12 @@ awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
 	-- ➊ ➋ ➌ ➍ ➎ ➏ ➐ ➑ ➒ ➓
     -- α β γ δ ε ϛ ζ η θ ι κ λ μ ν ξ ο π Ϟ ρ σ τ υ φ χ ψ ω ϡ
-	awful.tag({ "terms", "work", "web", "misc"}, s, {awful.layout.layouts[3], awful.layout.layouts[4], awful.layout.layouts[2], awful.layout.layouts[1]})
+	awful.tag({ "main", "code", "read", "web", "misc"}, s, 
+	{awful.layout.layouts[3], 
+	 awful.layout.layouts[4],
+	 awful.layout.layouts[1], 
+	 awful.layout.layouts[2],
+	 awful.layout.layouts[1]})
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -464,7 +470,7 @@ awful.screen.connect_for_each_screen(function(s)
 			myseparatorspaces,
 			pacicon,
 			pacwidget,
-			myseparatorspaces,
+--			myseparatorspaces,
 			mykeyboardlayout,
 			myseparator,
 			volicon,
