@@ -76,6 +76,7 @@ set number
 set cursorcolumn
 set linespace=1
 set laststatus=2			" включить панель статуса
+set showtabline=2
 
 set statusline=[%n]\ %<%F\ %m%r%h%w\ %y\ [%{&ff}]\ [%{&fileencoding}]\ %=\ [%{&encoding}]\ \ \ ASCII:%3b\ \ \ Hex:\ 0x%2B\ \ \ Ln:%3l:%L\ \ \ Col:%3c
 

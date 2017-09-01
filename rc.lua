@@ -268,6 +268,7 @@ vicious.register(pacwidget, vicious.widgets.pkg,
     if args[1] > 0 then
 		pacicon.visible = true
 		text = "<span color='#ffff00'>" .. args[1] .. "</span> |"
+		awful.util.spawn_with_shell("sudo pacman -Sy")
     else
 		pacicon.visible = false
 		text = ""
@@ -755,6 +756,15 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
+    
+    --Pidgin
+    { rule = { class = "Pidgin" },
+	properties = { screen = 1, tag = "misc" } },
+	
+    --Chromium
+    { rule = { class = "Chromium "},
+	properties = { screen = 1, tag = "web" } },
+    
 }
 -- }}}
 
