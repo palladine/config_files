@@ -107,10 +107,12 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { " awesome", myawesomemenu, beautiful.awesome_icon },
+		{ " Finam-Terminal", "wine /home/maksim/.wine/drive_c/Program\\ Files\\ \\(x86\\)/FINAM\\ Forex\\ Terminal/terminal.exe"},
+		{ " RoboForex-Terminal", "wine /home/maksim/win32/drive_c/Program\\ Files\\/RoboForex\\ -\\ MetaTrader\\ 5/terminal.exe"},
 		{ " Снимок экрана", 
 		function() 
 		   awful.util.spawn_with_shell("scrot -d10 -q100 '%y_%m_%d_screenshot.png' -e 'mv $f ~/screenshots/'") 
-	    end },
+		end },
 		{ " Run", "dmenu_run -i -p 'Выполнить:' -l 0 -w 1000 -h 40 -x 450 -y 400 -dim 0.6 -sb '#363636' -nf '#aaa' -sf '#fdfdfd' -fn 'Source Code Pro for Powerline:size=18'", beautiful.run_icon},
         { " open terminal", terminal },
         { " Перезагрузка", function()  awful.util.spawn_with_shell("systemctl reboot") end, beautiful.reboot_icon},
@@ -324,7 +326,7 @@ mywidgetdate:connect_signal("button::release",
 		    border_width = 1,
 		    border_color = '#aaaaaa',
 		    width = auto,
-		    height = 165,
+		    height = 185,
 		    margin = 15,
 		}
 	    end)
