@@ -111,7 +111,7 @@ mymainmenu = awful.menu({ items = { { " awesome", myawesomemenu, beautiful.aweso
 		{ " RoboForex-Terminal", "wine /home/maksim/win32/drive_c/Program\\ Files\\/RoboForex\\ -\\ MetaTrader\\ 5/terminal.exe"},
 		{ " Снимок экрана", 
 		function() 
-		   awful.util.spawn_with_shell("scrot -d10 -q100 '%y_%m_%d_screenshot.png' -e 'mv $f ~/screenshots/'") 
+		   awful.util.spawn_with_shell("scrot -q100 '%d%h%Y_%H%M%S_screenshot.png' -e 'mv $f ~/screenshots/'") 
 		end },
 		{ " Run", "dmenu_run -i -p 'Выполнить:' -l 0 -w 1000 -h 40 -x 450 -y 400 -dim 0.6 -sb '#363636' -nf '#aaa' -sf '#fdfdfd' -fn 'Source Code Pro for Powerline:size=18'", beautiful.run_icon},
         { " open terminal", terminal },
