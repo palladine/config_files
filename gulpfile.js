@@ -5,7 +5,7 @@ var reload = browserSync.reload;
 var connectPHP = require('gulp-connect-php');
 
 var paths = {
-    html:['./public/index.html'],
+    html:['./public/*.php'],
     css:['./css/*.css']
 };
 
@@ -26,26 +26,29 @@ gulp.task('css', function() {
 //
 
 // PHP reload
-//
-//
+gulp.task('php', function() {
+    connectPHP.server({
+	    base: './public/',
+		keepalive:true,
+		hostname: 'localhost',
+		port: 8001,
+		open: false,
+	});
+});
 
 gulp.task('browserSync', function() {
     browserSync({
-	    server: {
-		    baseDir: "./public/"
-		},
-		port:8080,
-		open: true,
-		notify: false
+		proxy: '127.0.0.1',
+		port: 8002,
 	});
 });
 
 
 gulp.task('watcher', function(){
     gulp.watch(paths.html, ['html']);
-	gulp.watch(paths.css, ['css'])
+	gulp.watch(paths.css, ['css']);
 });
 
 
-gulp.task('default', ['watcher', 'browserSync']);
+gulp.task('default', ['watcher', 'browserSync', 'php']);
 
