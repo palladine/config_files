@@ -1,54 +1,67 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-var connectPHP = require('gulp-connect-php');
 
-var paths = {
-    html:['./public/*.php'],
-    css:['./css/*.css']
-};
+////////////...TASK...Базовый.синтаксис...////////////////////////////////////////////////////////
+///
+///   gulp.task('task', function() {
+///       return gulp.src('file/s')                       ресурс
+///       .pipe(plugin())                                 выполнение плагина над ресурсом
+///       .pipe(gulp.dest('dir'))                         выгрузка в каталог
+///       .pipe(browserSync.reload({stream: true}))       если необходим reload
+///   });
+///
+///   Шаблоны ресурса:
+///   'filename.js'                                       один файл
+///   '[filename1.js, filename2.js, ..., filenameN.js']   массив файлов
+///   'dir/filename.js'                                   один файл из каталога 
+///   'dir/*.js'                                          все файлы с расширением .js из каталога 
+///   '/**/*.js'                                          любая вложенность каталогов
+///   '!filename.js'                                      исключить файл
+///   '*.+(js|css)'                                       все файлы js и css
+///                              
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
-// HTML reload
-gulp.task('html', function() {
-    gulp.src(paths.html)
-	.pipe(reload({stream:true}))
+////////////...TASK...Слежение.за.изменением...////////////////////////////////////////////////////
+///
+///   gulp.task('watch', ['browserSync', 'anyTask'], function() {  + таск browserSync
+///       gulp.watch('file/s', ['task/s_name']);                   при изменении file/s выполнить таск
+///       gulp.watch('file/s', browserSync.reload);                при изменении file/s выполнить reload
+///   });
+///
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////...TASK...browserSync...///////////////////////////////////////////////////////////////
+///
+///   gulp.task('browserSync', function() {
+///       browserSync({
+///           server: {
+///               baseDir: 'dir'
+///           },
+///           notify: true
+///       });
+///   });
+///      
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////  !ДЛЯ LIVERELOAD ТЭГ <body>..</body> ОБЯЗАТЕЛЕН В ФАЙЛЕ! ////////
+
+
+var gulp = require('gulp'), 
+    php = require('gulp-connect-php'),
+    browserSync = require('browser-sync').create();
+
+gulp.task('sync', function() {
+    browserSync.init({
+	proxy: "eduphp.loc"
+    });
 });
 
-// CSS reload
-gulp.task('css', function() {
-    gulp.src(paths.css)
-	.pipe(reload({stream:true}))
+
+gulp.task('connect', function() {
+    return php.server();
 });
 
-// JS reload
-//
-//
-
-// PHP reload
-gulp.task('php', function() {
-    connectPHP.server({
-	    base: './public/',
-		keepalive:true,
-		hostname: 'localhost',
-		port: 8001,
-		open: false,
-	});
+gulp.task('watch', function() {
+    gulp.watch('./public/*.php').on('change', function() { browserSync.reload(); });
+    gulp.watch('./public/*.html').on('change', function() { browserSync.reload(); });
 });
 
-gulp.task('browserSync', function() {
-    browserSync({
-		proxy: '127.0.0.1',
-		port: 8002,
-	});
-});
-
-
-gulp.task('watcher', function(){
-    gulp.watch(paths.html, ['html']);
-	gulp.watch(paths.css, ['css']);
-});
-
-
-gulp.task('default', ['watcher', 'browserSync', 'php']);
-
+gulp.task('default', ['watch', 'sync', 'connect']);
