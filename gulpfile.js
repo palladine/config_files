@@ -60,8 +60,8 @@ gulp.task('connect', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('./public/*.php').on('change', function() { browserSync.reload(); });
-    gulp.watch('./public/*.html').on('change', function() { browserSync.reload(); });
+    gulp.watch('./public/*.+(php|html|css|js)')
+    .on('change', function() { browserSync.reload(); });
 });
 
 gulp.task('default', ['watch', 'sync', 'connect']);
