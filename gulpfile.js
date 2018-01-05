@@ -3,8 +3,7 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create();
 
 gulp.task('css', function(){
-    gulp.src('./app/css/*.css')
-    .pipe(browserSync.reload({stream:true}));
+     gulp.src('./app/css/*.css').pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task('sync', function() {
@@ -15,14 +14,13 @@ gulp.task('sync', function() {
 
 
 gulp.task('connect', function() {
-    return php.server();
+    return php.server({ keepalive:true });
 });
 
 gulp.task('watch', function() {
+    gulp.watch('./app/css/*.css', ['css']);
     gulp.watch('./app/**/*.+(php|html|js)')
     .on('change', function() { browserSync.reload(); });
-    gulp.watch('./app/css/*.css', ['css']);
-    //gulp.watch('./app/css/*.css').on('change', browserSync.reload);
 });
 
 gulp.task('default', ['watch', 'sync', 'connect']);
